@@ -1,0 +1,18 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  MyTestApi:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "A sample Api"
+      Description: "Just for testing purposes"
+      Body:
+        Fn::Transform:
+          Name: AWS::Include
+          Parameters:
+            Location: !Sub "s3://${BucketName}/api/swagger.json"
+Parameters:
+  BucketName:
+    Description: Choose a Bucket
+    Type: "String"
+    Default: devops-meetinglog
